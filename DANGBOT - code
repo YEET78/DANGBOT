@@ -1,0 +1,366 @@
+const Discord = require('discord.js');
+const ver1 = require("./package.json");
+const ffmpeg = require("ffmpeg");
+const YTD = require("ytdl-core");
+const ver2 = ver1.version
+const client = new Discord.Client();
+const prefix = "*"
+
+
+
+// global.servers = {};
+
+// function Play(connection, message) {
+//   var server = servers[message.guild.id];
+//   server.dispatcher = connection.playStream(YTD(server.queue[0], {filter: "audioonly"}))
+//   server.queue.shift();
+//   server.dispatcher.on("end", function(){
+//     if (server.queue[0]){
+//       Play(connection, message);
+//     } else {
+//       connection.disconnect()
+//     }
+//   });
+// }
+
+function waitfor(time) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('resolved')
+    }, time);
+  })
+}
+
+
+// client.on('message', message => {
+//  if (message.content.includes('setNick')) {
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[", reason?: "prefix");
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M]",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] ",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] 🎃",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] 🎃 D",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] 🎃 DA",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] 🎃 DAN",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] 🎃 DANG",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] 🎃 DANG1",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] 🎃 DANG11",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] 🎃 DANG117",);
+//      message.guild.members.get("NDk0OTYyNjY5MDk5NTQ4Njcz.XXkbmA.vp-SwsCSwPegWTJOe8LvwV7VGKo").setNickname(nickname: "[M] 🎃 DANG1172");
+//   }
+// });
+
+
+client.on('message', message => {
+  var args = message.content.toLocaleLowerCase();
+  if (args.includes(prefix + 'changenick')) {
+    if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.channel.send('I don\'t have permission to change my nickname!');
+    message.guild.me.setNickname(message.content.replace(prefix + 'changenick ', ''));
+}});
+
+
+// client.on('message', message => {
+//   var args = message.content.toLocaleLowerCase();
+//   if (args.includes('!changeanick')) {
+//     if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) {
+//       message.channel.send('I don\'t have permission to change your nickname!');
+//     } else {
+//       message.member.setNickname(message.content.replace('!changenick ', ''));
+//     }
+// }});
+
+async function statusset() {
+  while(true) {
+    client.user.setPresence({game: {name: "Users",type: "LISTENING"}});
+    await waitfor(15000);
+    client.user.setPresence({game: {name: "Bad ideas",type: "LISTENING"}});
+    await waitfor(15000);
+    client.user.setPresence({game: {name: "With Lobby Bot",type: "PLAYING"}});
+    await waitfor(15000);
+    client.user.setPresence({game: {name: "PS4 Overwatch",type: "PLAYING"}});
+    await waitfor(15000);
+  }
+}
+
+client.on("message", (message) => {
+  if(message.content === "oof") {
+    message.channel.send("oof indeed")
+  }
+})
+
+
+client.on("message", (message) => {
+  var args = message.content.toLocaleLowerCase();
+  if(args === prefix + 'ping') {
+    message.channel.send("Your Pong'th Be   "+client.ping+"ms")
+  }
+});
+
+client.on("message", (message) => {
+  var args = message.content.toLocaleLowerCase();
+  if (args === prefix + "givemeainvischaracter") {
+    message.channel.send("­")
+  }
+});
+     
+client.on("message", (message) => {
+  var args = message.content.toLocaleLowerCase();
+  if(args.startsWith(prefix + 'echo')) {
+      message.delete();
+  }
+});
+
+
+
+client.on("message", (message) => {
+  if (message.content === prefix + "listemojis") {
+    try{
+      const emojiList = message.guild.emojis.map(e=>e.toString()).join(" ");
+      message.channel.send(emojiList);
+    } catch {
+      message.channel.send("No Emojis Found On This Server")
+    }
+  } 
+});
+
+
+client.on("message", (message) => {
+  if (message.content === prefix + "listallemojis") {
+    try{
+      const emojiList = client.emojis.map(e=>e.toString()).join(" ");
+      message.channel.send(emojiList);
+    } catch {
+      message.channel.send("No Emojis Found")
+    }
+  } 
+});
+
+client.on("message", (message) => {
+  if(message.content === "BO3") {
+    message.delete();
+    const BO3 = client.emojis.find(emoji => emoji.name === "BO3");
+    message.channel.send(`${BO3}`);
+  }
+  
+  if(message.content === "PC") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "PC");
+    message.channel.send(`${semoji}`);
+  }
+
+  if(message.content === "PS4") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "PS4");
+    message.channel.send(`${semoji}`);
+  }
+
+  if(message.content === "Xbox") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "Xbox");
+    message.channel.send(`${semoji}`);
+  }
+
+  if(message.content === "R6") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "Rainbow6");
+    message.channel.send(`${semoji}`);
+  }
+
+  if(message.content === "csgo") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "csgo");
+    message.channel.send(`${semoji}`);
+  }
+  if(message.content === "tf2") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "tf2");
+    message.channel.send(`${semoji}`);
+  }
+  if(message.content === "ow") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "overwatch");
+    message.channel.send(`${semoji}`);
+  }
+
+  if(message.content === "ow1") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "overwatch1");
+    message.channel.send(`${semoji}`);
+  }
+  if(message.content === "RL") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "RocketLeauge");
+    message.channel.send(`${semoji}`);
+  }
+  if(message.content === "BD") {
+    message.delete()
+    const semoji = client.emojis.find(emoji => emoji.name === "BONUSDUCKS");
+    message.channel.send(`${semoji}`);
+  }
+});
+
+
+client.on("message", (message) => {
+  var args = message.content.toLocaleLowerCase();
+  if (args.startsWith(prefix + "echo ")) {
+    if (args.includes("@")) {
+      if (args.includes("#")) {
+        if (args.hasPermission("ADMINISTRATOR")){
+          nmssg = (message.content)
+          message.channel.send(message.content.replace('*echo', ''), + nmssg)
+        } else {
+          message.reply("You dont have the admin permission to echo @/'s or mentions")
+        }
+      } else {
+        if (message.member.hasPermission("ADMINISTRATOR")){
+          nmssg = (message.content)
+          message.channel.send(message.content.replace('*echo', ''), + nmssg)
+        } else {
+          message.reply("You dont have the admin permission to echo @/'s or mentions")
+        }
+      }
+    } else {
+      nmssg = (message.content)
+      message.channel.send(message.content.replace('*echo', ''), + nmssg)
+    }
+  }
+});
+
+client.on('message', message => {
+  var args = message.content.toLocaleLowerCase();
+  if (args === prefix + 'what is my avatar') {
+    message.reply(message.author.avatarURL);
+  }
+});
+
+client.on('message', message => {
+  var args = message.content.toLocaleLowerCase();
+  if (!message.guild) return;
+  if (args.startsWith(prefix + 'kick')) {
+    if (message.member.hasPermission("KICK_MEMBERS")) {
+      // Read more about mentions over at https://discord.js.org/#/docs/main/stable/class/MessageMentions
+      const user = message.mentions.users.first();
+      if (user) {
+        const member = message.guild.member(user);
+        if (member) {
+          member.kick('OOFED').then(() => {
+            message.reply(`Successfully kicked ${user.tag}`);
+          }).catch(err => {
+            message.reply('I was unable to kick the member');
+            console.error(err);
+          });
+        } else {
+          message.reply('That user isn\'t in this guild!');
+        }
+      }  else {
+        message.reply('You didn\'t mention the user to kick!'); 
+      }
+      } else {
+      message.reply("You Dont Have Permission To Use This Command")
+      }
+    }
+    }
+);
+  
+client.on('message', message => {
+  var args = message.content.toLocaleLowerCase();
+  var banargs = message.content.slice(message.content.length).trim().split(/ +/g);
+  if (!message.guild) return;
+  if (args.startsWith(prefix + 'ban')) {
+    if (message.member.hasPermission("BAN_MEMBERS")){
+      // Read more about mentions over at https://discord.js.org/#/docs/main/stable/class/MessageMentions
+      const user = message.mentions.users.first();
+      if (user) {
+        const member = message.guild.member(user);
+        const reasonfor = message.content.replace(message.mentions.users.content, "")
+        if (member) {
+          let reason = banargs.slice(1).join(' ');
+          if(!reason) {
+            reason = "No reason provided";
+          }
+          member.ban({
+            reason: reason,
+          }).then(() => {
+            message.channel.send(`Successfully banned ${user.tag} for reason: ${reasonfor}`);
+          }).catch(err => {
+            message.reply(`I was unable to ban the member because of : ${error}`);
+            console.error(err);
+          });
+        } else {
+          message.reply('That user isn\'t in this guild!');
+        }
+      } else {
+        message.reply('You didn\'t mention the user to ban!');
+      }
+    } else {
+      message.reply("You Dont Have Permission To Use This Command")
+    }
+  }
+  });
+
+
+
+  client.on("message", (message) => {
+    var args = message.content.toLocaleLowerCase();
+    if(args.startsWith(prefix + 'help')) {
+      message.channel.send(` >>> Commands are: 
+      __USINGPREFIX (*)__
+      help : brings up this box
+      echo : replys with any message typed after
+      givemeaninvischaracter : gives a character invisible to discord
+      ping : replys with your ping
+      oof : replys with oof indeed
+      changenick : changes nickname of the bot itself
+      what is my avatar : gives the URl of your avatar
+      listemojis : lists all server emojis
+      listallemojis : lists all emojis the bot has access to
+      **(please note not all emojis listed, have been incorporated into the bot)**
+      kick : self explanatory
+      ban : self explanatory
+      __NOTUSINGPREFIX__
+      BO3 : uses BO3 emoji
+      R6 : uses Rainbow6 emoji
+      csgo : uses csgo emoji
+      tf2 : uses Titanfall2 emoji
+      ow : uses Overwatch emoji
+      ow1 : uses Overwatch1 emoji
+      RL : uses RocketLeauge emoji
+      BD : uses BONUSDUCKS emoji`);
+    }
+  });
+
+// client.on('message', message => {
+//   if (message.content === prefix + 'play') {
+//     const channel = message.member.voiceChannel;
+//     if (channel){
+//       if (!message.guild.voiceConnection) {
+//         if(!servers[message.guild.id]) {
+//           servers[message.guild.id] = {
+//             queue: []
+//           }
+//         }
+//         channel.join()
+//         .then(connection =>{
+//           var server = servers[message.guild.id];
+//           message.channel.send("Joined")
+//           server.queue.push(message.content)
+//           Play(connection, message)
+//         })
+//       }
+//     } else {
+//       message.channel.send("You must be in a voice channel")
+//     }
+//   }
+// });
+  
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+  statusset()
+  //client.destroy();
+});
+
+
+
+
+client.login("NjMyMTM3NzkxNjgxMDY5MDY3.XaBHtA.yyslv68Pn70X77GIxXBtm_2bkKo")
